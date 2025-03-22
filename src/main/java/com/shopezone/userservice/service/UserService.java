@@ -61,4 +61,12 @@ public class UserService {
     public Optional<User> getUserIdByUserName(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public void updateLastLogin(String userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            user.get().setLastLogin(new Date());
+            userRepository.save(user.get());
+        }
+    }
 }
